@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Web;
-using Holo.Core;
-using Holo.UI;
+using IntellectualPlayer.Core;
+using IntellectualPlayer.UI;
 using HoloDB;
 using NLog;
 
@@ -14,11 +14,11 @@ namespace MusicService
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private static HoloCore core;
+        private static PlayerCore core;
 
         public static string MusicFolder { get; set; }
 
-        public static HoloCore Core
+        public static PlayerCore Core
         {
             get
             {
@@ -33,7 +33,7 @@ namespace MusicService
         public static void InicializationCore()
         {
             var factory = new DefaultFactory();
-            core = new HoloCore(factory);
+            core = new PlayerCore(factory);
             core.SaveDatabase();
             Scaning();
             StartCalculeteProcessor();

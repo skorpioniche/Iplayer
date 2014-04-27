@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Holo.Core;
+using IntellectualPlayer.Core;
 using MusicService.Models;
 using MvcFileUploader;
 using MvcFileUploader.Models;
@@ -10,7 +10,7 @@ namespace MusicService.Controllers
 {
     public class MvcUploaderTestController : Controller
     {
-        private readonly HoloCore Core;
+        private readonly PlayerCore Core;
 
         public ActionResult Demo()
         {

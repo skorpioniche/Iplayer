@@ -381,19 +381,19 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Holo.Core\Holo.Core.csproj">
+    <ProjectReference Include="..\IPlayer.Core\IPlayer.Core.csproj">
       <Project>{E9C9C82F-6B7C-4BC0-BF0F-D6F05D3C9DDA}</Project>
       <Name>Holo.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Holo.Processing\Holo.Processing.csproj">
+    <ProjectReference Include="..\IPlayer.Processing\IPlayer.Processing.csproj">
       <Project>{3F1512E7-3875-4863-A41F-A2AC25E3CB4E}</Project>
       <Name>Holo.Processing</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Holo.UI\Holo.UI.csproj">
+    <ProjectReference Include="..\IPlayer.UI\IPlayer.UI.csproj">
       <Project>{701C48F8-2F23-4E80-979D-EE36A0B55E64}</Project>
       <Name>Holo.UI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HoloDB\HoloDB.csproj">
+    <ProjectReference Include="..\IPlayerDataBase\IPlayerDataBase.csproj">
       <Project>{58947E8E-F25D-413D-83B6-E9E31A45104D}</Project>
       <Name>HoloDB</Name>
     </ProjectReference>
