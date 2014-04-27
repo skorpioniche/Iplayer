@@ -1,0 +1,12 @@
+﻿@model MusicService.Models.UserProfile
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<h2>Это ваш профиль</h2>
+
+<p><strong>@User.Identity.Name</strong>.</p>
+<p>Ваш Email: @ViewData.Model.Email</p>
+
+@Html.ActionLink("Изменить пароль", "Manage");

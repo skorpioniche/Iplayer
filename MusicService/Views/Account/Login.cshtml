@@ -1,0 +1,86 @@
+﻿@model MusicService.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+<head>
+
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="content/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+	<script type="text/javascript" charset="utf-8">
+	    $(window).load(function () {
+	        $('.RememberMe :checkbox').iphoneStyle({ checkedLabel: 'Да', uncheckedLabel: 'Нет' });
+	    });
+	</script>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="span6 offset3">        
+				<div class="form-horizontal">
+					<legend>Вход в систему</legend>
+                    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+					<fieldset>                
+						<div class="control-group" id="EmailGroup">
+							<label class = "control-label" for = "EmailInput">Логин</label>
+							<div class="controls">
+                                @Html.TextBoxFor(m => m.UserName) 
+								@Html.ValidationMessageFor(m => m.UserName)
+							</div>
+
+						</div>          
+						<div class="control-group" id="PasswordGroup">                    
+							<label class = "control-label" for = "PasswordInput">Пароль</label>
+							<div class="controls">
+								 @Html.PasswordFor(m => m.Password)
+                                 @Html.ValidationMessageFor(m => m.Password)
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="optionsCheckbox"></label>
+							<div class="controls">
+								<table class="RememberMe">
+									<tr>
+									<td class="span2 padding-top5">
+										<label for="RememberMe">Запомнить меня</label>
+									</td>
+									<td class="">
+										@Html.CheckBoxFor(m => m.RememberMe)
+									</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div class="form-actions">
+                            <input class="btn btn-primary btn-large" type="submit" value="Log in" />
+						</div>
+					</fieldset>
+                         }
+                        <p>
+                              @Html.ActionLink("Register", "Register") если у вас ещё нет аккаунта.
+                      </p>
+				</div>
+			</div>
+		</div>
+	</div>
+  </body>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

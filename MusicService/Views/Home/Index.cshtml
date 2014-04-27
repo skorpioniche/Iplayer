@@ -1,0 +1,42 @@
+﻿@using MvcFileUploader.HtmlHelper
+@using MvcFileUploader.Models
+
+@model IEnumerable<MusicService.Models.Track>
+@{
+    ViewBag.Title = "MusicService";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    #dropZone {
+        background: gray;
+        border: black dashed 3px;
+        width: auto;
+        padding: 50px;
+        text-align: center;
+        color: white;
+    }
+</style>
+
+
+ @Html.Partial("_Player")
+
+    <h2 style="margin-top: 1em">Music</h2>
+     <div class="sm2-inline-list">
+        @foreach (var item in Model)
+        {
+            <div class="ui360 ui360-vis">
+                <a href=@Uri.EscapeDataString(item.FileName)>@Html.DisplayFor(modelItem => item.Name)</a>
+            </div>  
+        } 
+        </div>
+
+<!-- file upload modal dialog -->
+<div class="modal hide" id="dlgFileUpload" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-body"></div>
+</div>
+
+<div class="well">
+    <legend>Upload mp3</legend>        
+    @Html.Partial("_MvcFileupload", new FileUploadConfig() { FileTypes = @"/(\.|\/)(mp3|flac)$/i", MaxFileSizeInBytes = 50000000, UploadUrl = Url.Action("UploadFile", "MvcUploaderTest") })
+</div>
+

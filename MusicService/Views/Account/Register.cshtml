@@ -1,0 +1,61 @@
+﻿@model MusicService.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<form class="form-horizontal" action='' method="POST">
+    @using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+  <fieldset>
+    <div id="legend">
+      <legend class="">Register</legend>
+    </div>
+    <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">@Html.LabelFor(m => m.UserName)</label>
+      <div class="controls">
+        @Html.TextBoxFor(m => m.UserName)
+        <p class="help-block">@Html.ValidationMessageFor(m => m.UserName)</p>
+      </div>
+    </div>
+ 
+    <div class="control-group">
+      <!-- E-mail -->
+      <label class="control-label" for="email">@Html.LabelFor(m => m.Email)</label>
+      <div class="controls">
+        @Html.TextBoxFor(m => m.Email)
+        <p class="help-block">@Html.ValidationMessageFor(m => m.Email)</p>
+      </div>
+    </div>
+ 
+    <div class="control-group">
+      <!-- Password-->
+      <label class="control-label" for="password"> @Html.LabelFor(m => m.Password)</label>
+      <div class="controls">
+          @Html.PasswordFor(m => m.Password)
+        <p class="help-block">@Html.ValidationMessageFor(m => m.Password)</p>
+      </div>
+    </div>
+ 
+    <div class="control-group">
+      <!-- Password -->
+      <label class="control-label"  for="password_confirm">@Html.LabelFor(m => m.ConfirmPassword)</label>
+      <div class="controls">
+        @Html.PasswordFor(m => m.ConfirmPassword)
+        <p class="help-block">@Html.ValidationMessageFor(m => m.ConfirmPassword)</p>
+      </div>
+    </div>
+ 
+    <div class="control-group">
+      <!-- Button -->
+      <div class="controls">
+          <input class="btn btn-success" type="submit" value="Register" />
+      </div>
+    </div>
+  </fieldset>
+    }
+</form>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

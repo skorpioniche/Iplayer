@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MusicService.Models.Track>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Music</h2>
+
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Album)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Artist)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Album)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Artist)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileName)
+        </td>
+        <td>
+            <div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Action
+    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    @{ var routevalues = new { id = item.TrackId };  
+                        <li>@Html.ActionLink("Edit", "Edit", routevalues)</li>
+                        <li>@Html.ActionLink("Details", "Details", routevalues) </li>
+                        <li class="divider"></li>
+                        <li><a href="~/@Uri.EscapeDataString(item.FileName).ToString()" title=@item.Name rel="" download=@item.Name>Save mp3</a></li>
+                        <li>@Html.ActionLink("Delete", "Delete", routevalues)</li>
+                                                     
+                    }
+                </ul>
+            </div>
+        </td>
+    </tr>
+}
+
+</table>
+

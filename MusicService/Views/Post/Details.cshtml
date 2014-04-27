@@ -1,0 +1,61 @@
+﻿@model MusicService.Models.Post
+@using MusicService.Models
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+@Html.Partial("_Player")
+<div class="row">
+    <div class="span8">
+        <div class="row">
+            <div class="span8">
+                <h4><strong>Post</></strong></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span2">
+
+                @{UsersContext db = new UsersContext();
+                  var tracks = Model.Tracks;
+                  foreach (var track in tracks)
+                  {            
+                    <div class="ui360 ui360-vis">
+                        <a href="~/@Uri.EscapeDataString(track.FileName).ToString()">@Html.DisplayFor(modelItem => track.Name)</a>
+                    </div>
+                  }
+                }
+                <div class="btn-group">
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Action
+    <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @{ var routevalues = new { id = Model.PostId };  
+                            <li>@Html.ActionLink("Edit", "Edit", routevalues)</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Delete", "Delete", routevalues)</li>                             
+                        }
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="span6">
+                <p>
+                    @Model.Message
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span8">
+                <p></p>
+                <p>
+                    <i class="icon-user"></i>by <a href="#">@Model.User.UserName</a>
+                    | <i class="icon-thumbs-up"></i><a>&nbsp; @Model.Likes.Count &nbsp;</a>
+                    | &nbsp;&nbsp;&nbsp;&nbsp; <a href="#" class="btn btn-inverse disabled"><i class="icon-white icon-thumbs-up"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>

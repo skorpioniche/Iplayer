@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MusicService.Models.Post>
+@using MusicService.Models
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@Html.Partial("_Player")
+<h2 style="margin-top: 1em">Music</h2>
+<button class="btn btn-inverse">@Html.ActionLink("Create New", "Create", "Post")</button>
+@foreach (var post in Model)
+{
+    <div class="row">
+        <div class="span8">
+            <div class="row">
+                <div class="span8">
+                    <h4><strong>@Html.ActionLink("Open", "Details", new { id = post.PostId })</strong></h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span6">
+                    <p>
+                        @post.Message
+                    </p>
+                </div>
+                <div class="span8">
+
+                    @{UsersContext db = new UsersContext();
+                      var tracks = post.Tracks;
+                      foreach (var track in tracks)
+                      {            
+                        <div class="ui360">
+                            <a href=@Uri.EscapeDataString(track.FileName)>@Html.DisplayFor(modelItem => track.Name)</a>
+                        </div>
+                        <a href="~/@Uri.EscapeDataString(track.FileName).ToString()" title=@track.Name rel="" download=@track.Name><i class="icon-hdd"></i>Save</a>
+
+                      }
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="span8">
+                    <p></p>
+                    <p>
+                        <i class="icon-user"></i>by <a href="#">@post.User.UserName</a>
+                        |  <i class="icon-hdd"></i>@Html.ActionLink("Details", "Details", new { id = post.PostId })
+                        | <i class="icon-thumbs-up"></i><a>&nbsp; @post.Likes.Count &nbsp;</a>
+                        | &nbsp;&nbsp;&nbsp;&nbsp; <a href="#" class="btn btn-inverse disabled"><i class="icon-white icon-thumbs-up"></i></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <br />
+}

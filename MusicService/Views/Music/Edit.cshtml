@@ -1,0 +1,53 @@
+﻿@model MusicService.Models.Track
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Track</legend>
+
+        @Html.HiddenFor(model => model.TrackId)
+
+        <h5>
+            @Html.LabelFor(model => model.Name)
+        </h5>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <h5>
+            @Html.LabelFor(model => model.Album)
+        </h5>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Album)
+            @Html.ValidationMessageFor(model => model.Album)
+        </div>
+
+        <h5>
+            @Html.LabelFor(model => model.Artist)
+        </h5>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Artist)
+            @Html.ValidationMessageFor(model => model.Artist)
+        </div>
+        <br />
+        <p>
+            <input class="btn btn-inverse" type="submit" value="Save" />
+             | <button class="btn btn-inverse"> @Html.ActionLink("Back to List", "Index")</button> 
+        </p>
+    </fieldset>
+}
+
+  
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

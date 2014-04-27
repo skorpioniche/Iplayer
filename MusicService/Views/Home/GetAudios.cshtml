@@ -1,0 +1,15 @@
+﻿@model HoloDB.Audios
+@{
+    ViewBag.Title = "GetAudios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GetAudios</h2>
+<ul>
+    @foreach (var audio in Model)
+    {
+        <li>
+            @audio.ShortName
+        </li>
+    }
+</ul>

@@ -1,0 +1,49 @@
+﻿@model MusicService.Models.Track
+@using MusicService.Models
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+@Html.Partial("_Player")
+
+
+<fieldset>
+    <legend>Track</legend>
+     
+    <div class="ui360 ui360-vis">
+        <a href="~/@Uri.EscapeDataString(Model.FileName).ToString()">@Html.DisplayFor(modelItem => Model.Name)</a>
+    </div>
+    <br />
+    <h5>
+         @Html.DisplayNameFor(model => model.Name)
+    </h5>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <h5>
+         @Html.DisplayNameFor(model => model.Album)
+    </h5>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Album)
+    </div>
+
+    <h5>
+         @Html.DisplayNameFor(model => model.Artist)
+    </h5>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Artist)
+    </div>
+
+
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FileName)
+    </div>
+</fieldset>
+<br />
+<p>
+     <button class="btn btn-inverse"> @Html.ActionLink("Edit", "Edit", new { id=Model.TrackId })</button> 
+     |<button class="btn btn-inverse">  @Html.ActionLink("Back to List", "Index")</button> 
+   
+</p>

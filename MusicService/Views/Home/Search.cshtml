@@ -1,0 +1,20 @@
+﻿@model IList<HoloDB.Audio>
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Search</h2>
+@Html.Partial("_Player")
+<ul>
+    <div class="sm2-inline-list">
+        @foreach (var audio in Model)
+        {
+            <div class="ui360 ui360-vis">
+                <a href=@Uri.EscapeUriString("http://localhost:64083/Content/uploads/" + audio.ShortName)>
+                    @Html.DisplayFor(modelItem => audio.ShortName)
+                </a>
+            </div>
+        }
+    </div>
+</ul>
