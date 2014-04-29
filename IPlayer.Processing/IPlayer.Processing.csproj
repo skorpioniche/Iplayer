@@ -76,11 +76,11 @@
   <ItemGroup>
     <ProjectReference Include="..\IPlayer.Core\IPlayer.Core.csproj">
       <Project>{E9C9C82F-6B7C-4BC0-BF0F-D6F05D3C9DDA}</Project>
-      <Name>Holo.Core</Name>
+      <Name>IPlayer.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\IPlayerDataBase\IPlayerDataBase.csproj">
       <Project>{58947E8E-F25D-413D-83B6-E9E31A45104D}</Project>
-      <Name>HoloDB</Name>
+      <Name>IPlayerDataBase</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

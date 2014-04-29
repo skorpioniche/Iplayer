@@ -18,17 +18,17 @@ namespace IntellectualPlayer
         {
             string StartupPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
-            string ConfigFile = Path.Combine(StartupPath, "IntellectualPlayer.UI.exe.config");
-            string Assembly = Path.Combine(StartupPath, "IntellectualPlayer.UI.exe");
+            string ConfigFile = Path.Combine(StartupPath, "IPlayer.UI.exe.config");
+            string Assembly = Path.Combine(StartupPath, "IPlayer.UI.exe");
 
             AppDomainSetup DomainSetup = new AppDomainSetup
                                              {
-                                                 ApplicationName = "IntellectualPlayer.UI",
+                                                 ApplicationName = "IPlayer.UI",
                                                  ShadowCopyFiles = "true",
                                                  ConfigurationFile = ConfigFile
                                              };
 
-            AppDomain Domain = AppDomain.CreateDomain("Holo", AppDomain.CurrentDomain.Evidence, DomainSetup);
+            AppDomain Domain = AppDomain.CreateDomain("Iplayer", AppDomain.CurrentDomain.Evidence, DomainSetup);
 
             Domain.ExecuteAssembly(Assembly);
 

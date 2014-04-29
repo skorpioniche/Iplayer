@@ -71,7 +71,7 @@
   <ItemGroup>
     <ProjectReference Include="..\IPlayerDataBase\IPlayerDataBase.csproj">
       <Project>{58947E8E-F25D-413D-83B6-E9E31A45104D}</Project>
-      <Name>HoloDB</Name>
+      <Name>IPlayerDataBase</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

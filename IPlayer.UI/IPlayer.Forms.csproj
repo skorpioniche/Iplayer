@@ -205,19 +205,19 @@
   <ItemGroup>
     <ProjectReference Include="..\IPlayer.Core\IPlayer.Core.csproj">
       <Project>{e9c9c82f-6b7c-4bc0-bf0f-d6f05d3c9dda}</Project>
-      <Name>Holo.Core</Name>
+      <Name>IPlayer.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\IPlayer.Processing\IPlayer.Processing.csproj">
       <Project>{3f1512e7-3875-4863-a41f-a2ac25e3cb4e}</Project>
-      <Name>Holo.Processing</Name>
+      <Name>IPlayer.Processing</Name>
     </ProjectReference>
     <ProjectReference Include="..\BassDecoder\BassDecoder.csproj">
       <Project>{7b70e195-7999-4435-91fd-ab1d288ed885}</Project>
-      <Name>HoloBassDecoder</Name>
+      <Name>BassDecoder</Name>
     </ProjectReference>
     <ProjectReference Include="..\IPlayerDataBase\IPlayerDataBase.csproj">
       <Project>{58947e8e-f25d-413d-83b6-e9e31a45104d}</Project>
-      <Name>HoloDB</Name>
+      <Name>IPlayerDataBase</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
