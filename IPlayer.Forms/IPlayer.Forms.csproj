@@ -166,9 +166,6 @@
     <None Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Images\HOLO.ico">
-      <Link>HOLO.ico</Link>
-    </Content>
     <Content Include="..\Libs\BASS\x86\bass.dll">
       <Link>bass.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

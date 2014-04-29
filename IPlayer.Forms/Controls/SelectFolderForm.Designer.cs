@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btOk = new System.Windows.Forms.Button();
-            this.tv = new ExplorerTree();
+            this.tv = new IntellectualPlayer.UI.Controls.ExplorerTree();
             this.btCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 

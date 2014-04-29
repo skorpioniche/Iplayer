@@ -41,7 +41,6 @@ namespace IntellectualPlayer.UI
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.pbSettings = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btAddFolder = new System.Windows.Forms.PictureBox();
             this.ttMain = new System.Windows.Forms.ToolTip(this.components);
             this.cmSettings = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -52,7 +51,6 @@ namespace IntellectualPlayer.UI
             this.pnTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btAddFolder)).BeginInit();
             this.cmSettings.SuspendLayout();
             this.SuspendLayout();
@@ -107,7 +105,6 @@ namespace IntellectualPlayer.UI
             this.pnTop.Controls.Add(this.tbSearch);
             this.pnTop.Controls.Add(this.pbSettings);
             this.pnTop.Controls.Add(this.label1);
-            this.pnTop.Controls.Add(this.pictureBox1);
             this.pnTop.Controls.Add(this.btAddFolder);
             this.pnTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnTop.Location = new System.Drawing.Point(0, 0);
@@ -166,24 +163,13 @@ namespace IntellectualPlayer.UI
             this.label1.TabIndex = 0;
             this.label1.Text = "Music collection";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::IntellectualPlayer.UI.Resource.HOLO1;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 13);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(108, 28);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
             // btAddFolder
             // 
             this.btAddFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btAddFolder.BackColor = System.Drawing.Color.Transparent;
             this.btAddFolder.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btAddFolder.Image = global::IntellectualPlayer.UI.Resource.folder_open_add;
-            this.btAddFolder.Location = new System.Drawing.Point(794, 29);
+            this.btAddFolder.Location = new System.Drawing.Point(794, 32);
             this.btAddFolder.Name = "btAddFolder";
             this.btAddFolder.Size = new System.Drawing.Size(32, 32);
             this.btAddFolder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -233,7 +219,7 @@ namespace IntellectualPlayer.UI
             this.Controls.Add(this.pnTop);
             this.Controls.Add(this.ssMain);
             this.Name = "MainForm";
-            this.Text = "Holo";
+            this.Text = " ";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
             this.ssMain.ResumeLayout(false);
@@ -242,7 +228,6 @@ namespace IntellectualPlayer.UI
             this.pnTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btAddFolder)).EndInit();
             this.cmSettings.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -257,7 +242,6 @@ namespace IntellectualPlayer.UI
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox btAddFolder;
         private System.Windows.Forms.ToolTip ttMain;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private AudiosPanel pnAudios;
         private System.Windows.Forms.ToolStripStatusLabel lbItemCount;
         private System.Windows.Forms.ToolStripProgressBar pbProgress;
