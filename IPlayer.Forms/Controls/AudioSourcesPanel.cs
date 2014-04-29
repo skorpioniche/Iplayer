@@ -325,7 +325,7 @@ namespace IntellectualPlayer.UI.Controls
             {
                 var item = items[selectedItemIndex];
 
-                //new Tester(RunManager.Factory).Process(item);
+                //new Tester(RunManager.Factory).AudioAnalys(item);
 
                 Invalidate();
             }

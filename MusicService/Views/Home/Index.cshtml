@@ -37,6 +37,6 @@
 
 <div class="well">
     <legend>Upload mp3</legend>        
-    @Html.Partial("_MvcFileupload", new FileUploadConfig() { FileTypes = @"/(\.|\/)(mp3|flac)$/i", MaxFileSizeInBytes = 50000000, UploadUrl = Url.Action("UploadFile", "MvcUploaderTest") })
+    @Html.Partial("_MvcFileupload", new FileUploadConfig() { FileTypes = @"/(\.|\/)(mp3)$/i", MaxFileSizeInBytes = 50000000, UploadUrl = Url.Action("UploadFile", "MvcUploaderTest") })
 </div>
 

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using IntellectualPlayer.Processing;
-using IntellectualPlayer.Processing.Helpers;
+
 
 namespace IntellectualPlayer.UI.Controls
 {

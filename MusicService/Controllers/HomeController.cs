@@ -60,9 +60,15 @@ namespace MusicService.Controllers
 
         public ActionResult Search(int id)
         {
+            var trackList = new List<Track>();
+            if (db.Tracks.Any())
+            {
+                trackList = db.Tracks.ToList();
+            }
+
             if (id < 0 || id >= ShownItems.Count)
             {
-                return View(ShownItems);
+                return View(new List<Track>());
             }
 
             SimilarityOptions Options = new SimilarityOptions()
@@ -75,7 +81,16 @@ namespace MusicService.Controllers
             };
 
             var searchItems = ShownItems.SearchBy<SearchBySimilarity>(id, Options);
-            return View(searchItems);
+            var showTrackList = new List<Track>();
+            foreach (var shownItem in searchItems)
+            {
+                var track = trackList.FirstOrDefault(t => t.FileName.Contains(shownItem.ShortName));
+                if (track != null)
+                {
+                    showTrackList.Add(track);
+                }
+            }
+            return View(showTrackList);
 
         }
 

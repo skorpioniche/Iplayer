@@ -7,7 +7,7 @@ namespace IntellectualPlayer.Core.Helpers
 {
     internal static class FileScanner
     {
-        public static IEnumerable<Info> Scan(string directory)
+        public static IEnumerable<ItemInfo> Scan(string directory)
         {
             IntPtr INVALID_HANDLE_VALUE = new IntPtr(-1);
             WIN32_FIND_DATAW findData;
@@ -34,7 +34,7 @@ namespace IntellectualPlayer.Core.Helpers
                                 yield return item;
                         }
 
-                        yield return new Info()
+                        yield return new ItemInfo()
                         {
                             CreatedDate = ToDateTime(findData.ftCreationTime),
                             ModifiedDate = ToDateTime(findData.ftLastWriteTime),
@@ -51,7 +51,7 @@ namespace IntellectualPlayer.Core.Helpers
             }
         }
 
-        public class Info
+        public class ItemInfo
         {
             public DateTime CreatedDate;
             public DateTime ModifiedDate;

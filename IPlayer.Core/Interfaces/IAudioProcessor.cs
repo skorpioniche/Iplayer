@@ -8,6 +8,6 @@ namespace IntellectualPlayer.Core
     public interface IAudioProcessor
     {
         event EventHandler<ProgressChangedEventArgs> Progress;
-        void Process(IList<Audio> list);
+        void AudioAnalys(IList<Audio> audioList);
     }
 }

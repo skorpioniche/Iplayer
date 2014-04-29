@@ -1,4 +1,4 @@
-﻿@model IList<HoloDB.Audio>
+﻿@model List<MusicService.Models.Track>
 @{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,8 +11,8 @@
         @foreach (var audio in Model)
         {
             <div class="ui360 ui360-vis">
-                <a href=@Uri.EscapeUriString("http://localhost:64083/Content/uploads/" + audio.ShortName)>
-                    @Html.DisplayFor(modelItem => audio.ShortName)
+                <a href=@Uri.EscapeUriString("http://localhost:64083" + audio.FileName)>
+                    @Html.DisplayFor(modelItem => audio.Name)
                 </a>
             </div>
         }

@@ -143,7 +143,7 @@ namespace IntellectualPlayer.Core
             Database.IsChanged = true;
 
             Processor.Progress += progressCallback;
-            Processor.Process(UnprocessedItems);
+            Processor.AudioAnalys(UnprocessedItems);
         }
 
         public void ProcessAudios()
@@ -158,7 +158,7 @@ namespace IntellectualPlayer.Core
             var processor = Factory.CreateAudioProcessor();
 
             Database.IsChanged = true;
-            processor.Process(unprocessedItems);
+            processor.AudioAnalys(unprocessedItems);
         }
 
         public IEnumerable<Audio> GetAudios()

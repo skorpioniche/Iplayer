@@ -15,9 +15,9 @@ namespace IntellectualPlayer.Core
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        protected Factory factory;
-        protected Queue<Audio> sourceQueue = new Queue<Audio>();
-        protected int itemsCount;
+        private  Factory factory;
+        private Queue<Audio> audioSourceQueue = new Queue<Audio>();
+        private int itemsCount;
 
         /// <summary>
         /// Requested bitrate of signal after decoding
@@ -35,25 +35,37 @@ namespace IntellectualPlayer.Core
         }
 
         /// <summary>
-        /// Process list of Audio items
+        /// AudioAnalys audioList of Audio items
         /// </summary>
-        /// <param name="list"></param>
-        public virtual void Process(IList<Audio> list)
+        /// <param name="audioList"></param>
+        public virtual void AudioAnalys(IList<Audio> audioList)
         {
-            if (list.Count == 0)
+            if (audioList.Count == 0)
+            {
                 return;
+            }
 
-            lock (sourceQueue)
-            foreach (var item in list)
-                sourceQueue.Enqueue(item);
+            lock (audioSourceQueue)
+            {
+                foreach (var item in audioList)
+                {
+                    audioSourceQueue.Enqueue(item);
+                }
+            }
 
-            itemsCount += list.Count;
+            itemsCount += audioList.Count;
 
             using (var decoder = factory.CreateAudioDecoder())
-            if (decoder.AllowsMultithreading)
-                ProcessMultithreading(decoder);
-            else
-                Process(decoder);
+            {
+                if (decoder.AllowsMultithreading)
+                {
+                    ProcessMultithreading(decoder);
+                }
+                else
+                {
+                    AudioAnalys(decoder);
+                }
+            }
 
             OnProgress(new ProgressChangedEventArgs(100, null));
         }
@@ -76,67 +88,71 @@ namespace IntellectualPlayer.Core
             var threads = new List<Thread>();
             //create threads
             var threadCount = Environment.ProcessorCount;
-            for(int i = 0;i<threadCount;i++)
+            for (int i = 0; i < threadCount; i++)
             {
-                var t = new Thread(() => Process(decoder)) {IsBackground = true};
+                var t = new Thread(() => AudioAnalys(decoder)) { IsBackground = true };
                 t.Start();
                 threads.Add(t);
             }
 
-            while (sourceQueue.Count > 0)
+            while (audioSourceQueue.Count > 0)
+            {
                 Thread.Sleep(100);
+            }
 
             foreach (var t in threads)
+            {
                 t.Join();
+            }
         }
 
         /// <summary>
         /// Gets audio from queue and process it
         /// </summary>
-        protected virtual void Process(IAudioDecoder decoder)
+        protected virtual void AudioAnalys(IAudioDecoder decoder)
         {
             int counter = 0;
             Audio item;
-            while((item = GetItemFromQueue())!=null)
-            try
-            {
-                counter++;
-                //decode audio source to samples and mp3 tags extracting
-                AudioInfo info = null;
-                using (var stream = item.GetSourceStream())
-                    info = decoder.Decode(stream, TargetBitrate, item.GetSourceExtension());
+            while ((item = GetItemFromQueue()) != null)
+                try
+                {
+                    counter++;
+                    //decode audio source to samples and mp3 tags extracting
+                    AudioInfo info = null;
+                    using (var stream = item.GetSourceStream())
+                        info = decoder.Decode(stream, TargetBitrate, item.GetSourceExtension());
 
-                //normalize volume level
-                info.Samples.Normalize();
+                    //normalize volume level
+                    info.Samples.Normalize();
 
-                //launch sample processors
-                foreach (var processor in factory.CreateSampleProcessors())
-                    try
-                    {
-                        processor.Process(item, info);
-                    }
-                    catch(Exception E)
-                    {
-                        Logger.WarnException("Audio processor exception.", E);
-                    }
+                    //launch sample processors
+                    foreach (var processor in factory.CreateSampleProcessors())
+                        try
+                        {
+                            processor.Process(item, info);
+                        }
+                        catch (Exception E)
+                        {
+                            Logger.WarnException("Audio processor exception.", E);
+                        }
 
-                OnProgress(new ProgressChangedEventArgs(100 * (itemsCount - sourceQueue.Count) / itemsCount, null));
-                item.State = AudioState.Processed;
-            }
-            catch (Exception E)
-            {
-                Logger.ErrorException("Audio processing failed.", E);
+                    OnProgress(new ProgressChangedEventArgs(100 * (itemsCount - audioSourceQueue.Count) / itemsCount, null));
+                    item.State = AudioState.Processed;
+                }
+                catch (Exception E)
+                {
+                    Logger.ErrorException("Audio processing failed.", E);
 
-                item.State = AudioState.Bad;
-            }
+                    item.State = AudioState.Bad;
+                }
         }
 
         protected virtual Audio GetItemFromQueue()
         {
-            lock(sourceQueue)
+            lock (audioSourceQueue)
             {
-                if (sourceQueue.Count > 0)
-                    return sourceQueue.Dequeue();
+                if (audioSourceQueue.Count > 0)
+                    return audioSourceQueue.Dequeue();
             }
 
             return null;
