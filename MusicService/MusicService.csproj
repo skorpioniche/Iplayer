@@ -196,6 +196,7 @@
     <Compile Include="Models\MusicModels.cs" />
     <Compile Include="MusicSingltone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\GetAudiosViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\360player-visualization.css" />

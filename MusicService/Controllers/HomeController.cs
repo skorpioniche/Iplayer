@@ -4,10 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IntellectualPlayer.Core;
+using IntellectualPlayer.Processing;
 using IntellectualPlayer.Processing.Search;
 using IntellectualPlayer.UI;
 using HoloDB;
+using IntellectualPlayer.UI.Controls;
 using MusicService.Models;
+using MusicService.ViewModel;
 using MvcFileUploader;
 using MvcFileUploader.Models;
 
@@ -51,10 +54,19 @@ namespace MusicService.Controllers
 
         public ActionResult GetAudios()
         {
-            MusicSingltone.Core.ProcessAudios();
             ShownItems = new Audios(MusicSingltone.Core.GetAudios());//temp !!!!!
-            MusicSingltone.SaveChanges();
-            return View(ShownItems);
+            var audios = ShownItems.Select(shownItem => new GetAudiosViewModel()
+            {
+                Sha1HashDescriptor = (SHA1HashDescriptor)shownItem.Data[0],
+                Envelope = (Envelope)shownItem.Data[1],
+                VolumeDescriptor = (VolumeDescriptor)shownItem.Data[2],
+                Tempogram = (Tempogram)shownItem.Data[3],
+                FullPath = shownItem.FullPath,
+                State = shownItem.State,
+                Tag = shownItem.Tag
+            }).ToList();
+
+            return View(audios);
         }
 
 

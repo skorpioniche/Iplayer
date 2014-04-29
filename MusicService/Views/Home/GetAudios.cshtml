@@ -1,4 +1,5 @@
-﻿@model HoloDB.Audios
+﻿@using HoloDB
+@model List<MusicService.ViewModel.GetAudiosViewModel>
 @{
     ViewBag.Title = "GetAudios";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,7 +10,7 @@
     @foreach (var audio in Model)
     {
         <li>
-            @audio.ShortName
+            @audio.ShortName.Remove(@audio.ShortName.Length-23) | @audio.Tempogram.Description | @audio.Tempogram.Intensity | @audio.Tempogram.LongRhythmLevel | @audio.Tempogram.LongRhythmIsValid 
         </li>
     }
 </ul>
