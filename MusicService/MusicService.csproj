@@ -389,7 +389,7 @@
       <Project>{3F1512E7-3875-4863-A41F-A2AC25E3CB4E}</Project>
       <Name>IPlayer.Processing</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IPlayer.UI\IPlayer.Forms.csproj">
+    <ProjectReference Include="..\IPlayer.Forms\IPlayer.Forms.csproj">
       <Project>{701C48F8-2F23-4E80-979D-EE36A0B55E64}</Project>
       <Name>IPlayer.Forms</Name>
     </ProjectReference>

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BassDecoder", "BassDecoder\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPlayerDataBase", "IPlayerDataBase\IPlayerDataBase.csproj", "{58947E8E-F25D-413D-83B6-E9E31A45104D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPlayer.Forms", "IPlayer.UI\IPlayer.Forms.csproj", "{701C48F8-2F23-4E80-979D-EE36A0B55E64}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPlayer.Forms", "IPlayer.Forms\IPlayer.Forms.csproj", "{701C48F8-2F23-4E80-979D-EE36A0B55E64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPlayer.Core", "IPlayer.Core\IPlayer.Core.csproj", "{E9C9C82F-6B7C-4BC0-BF0F-D6F05D3C9DDA}"
 EndProject
