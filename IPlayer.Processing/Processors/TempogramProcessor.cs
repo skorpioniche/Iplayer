@@ -19,39 +19,42 @@ namespace IntellectualPlayer.Processing
         public void Process(Audio item, AudioInfo info)
         {
             var tempogram = new Tempogram();
+            //get maximum values
+            Samples samples = new EnvelopeProcessor(factory).Build(info.Samples, 32, false);
+            var newSamples = new Samples()
+            {
+                Values = new float[samples.Values.Length], Bitrate = samples.Bitrate
+            };
 
-            var s = info.Samples;
-
-            s = new EnvelopeProcessor(factory).Build(info.Samples, 32, false);
-            var s2 = new Samples() { Values = new float[s.Values.Length], Bitrate = s.Bitrate };
             var intensity = 0; 
 
-            for (int i = 0; i < s.Values.Length - 1; i++)
+            for (int i = 0; i < samples.Values.Length - 1; i++)
             {
-                var d = s.Values[i + 1] - s.Values[i];
-                var dd = d > 0 ? d : 0;
-                s.Values[i] = dd;
-                s2.Values[i] = d;
-                if (d > minAmplitudeChangeForIntensityRate)
+                var diff = samples.Values[i + 1] - samples.Values[i];
+                samples.Values[i] = diff > 0 ? diff : 0; //разница между всеми амплитудами
+                newSamples.Values[i] = diff;
+                if (diff > minAmplitudeChangeForIntensityRate)
+                {
                     intensity++;
+                }
             }
-            s.Values[s.Values.Length - 1] = 0;
-            s2.Values[s.Values.Length - 1] = 0;
+            samples.Values[samples.Values.Length - 1] = 0;
+            newSamples.Values[samples.Values.Length - 1] = 0;
 
-            var time = s.Values.Length / s.Bitrate;//time of sound
+            var durationOfTrack = samples.Values.Length / samples.Bitrate;//time of sound
 
-            var maxShift = (int)(s.Values.Length * (maxRithmDuration / time));
+            var maxShift = (int)(samples.Values.Length * (maxRithmDuration / durationOfTrack));
 
-            var autoCorr1 = AutoCorr(s.Values, maxShift, 5);
-            var autoCorr2 = AutoCorr(s2.Values, maxShift, 2);
-            var l = (float)autoCorr1.Length;
-            var k = Math.Log(2);
+            var autoCorr1 = AutoCorr(samples.Values, maxShift, 5);
+            var autoCorr2 = AutoCorr(newSamples.Values, maxShift, 2);
+            var lengthCorr1 = (float)autoCorr1.Length;
+            var log2 = Math.Log(2);
             var list1 = new List<KeyValuePair<float, float>>();
             var list2 = new List<KeyValuePair<float, float>>();
-            for (int i = 0; i < l; i++)
+            for (int i = 0; i < lengthCorr1; i++)
             {
-                var j = i / (float)l;
-                j = (float)(Math.Log(j + 1) / k);
+                var j = i / (float)lengthCorr1;
+                j = (float)(Math.Log(j + 1) / log2);
                 list1.Add(new KeyValuePair<float, float>(j, autoCorr1[i]));
 
                 var v = autoCorr2[i];
@@ -60,7 +63,7 @@ namespace IntellectualPlayer.Processing
             tempogram.LongTempogram.Build(list1);
             tempogram.ShortTempogram.Build(list2);
 
-            tempogram.Intensity = (float)intensity / time;
+            tempogram.Intensity = (float)intensity / durationOfTrack;
 
             CalcTempo(tempogram);
 
@@ -96,8 +99,6 @@ namespace IntellectualPlayer.Processing
         protected virtual float[] AutoCorr(float[] values, int maxShift, int pow = 2)
         {
             float[] autoCorr = new float[maxShift - 1];
-            var l = values.Length;
-
 
             for (int shift = 1; shift < maxShift; shift++)
             {
@@ -105,12 +106,14 @@ namespace IntellectualPlayer.Processing
                 var count = values.Length - (pow - 1)*shift;
                 for (int i = 0; i < count; i++)
                 {
-                    var v = values[i];
+                    var value = values[i];
 
                     for (int p = 1; p < pow; p++)
-                        v *= values[i + p * shift];
+                    {
+                        value *= values[i + p * shift];
+                    }
 
-                    sum += v;
+                    sum += value;
                 }
                 autoCorr[shift - 1] = sum;
             }

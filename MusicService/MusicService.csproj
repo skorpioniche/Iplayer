@@ -371,6 +371,7 @@
     <Content Include="Views\Home\Scan.cshtml" />
     <Content Include="Views\Home\GetAudios.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\GetMeta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -397,6 +398,10 @@
     <ProjectReference Include="..\IPlayerDataBase\IPlayerDataBase.csproj">
       <Project>{58947E8E-F25D-413D-83B6-E9E31A45104D}</Project>
       <Name>IPlayerDataBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mp3Lib\Mp3Lib.csproj">
+      <Project>{E16E2254-A7A2-4E45-95B9-8613C67B3FD4}</Project>
+      <Name>Mp3Lib</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

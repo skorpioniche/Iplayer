@@ -125,11 +125,19 @@ namespace IntellectualPlayer.Processing
             var size = Size;
             var res = 0f;
             if (size == other.Size)
+            {
                 for (int i = 0; i < size; i++)
+                {
                     res += Math.Abs(values[i] - other.values[i])/255f;
+                }
+            }
             else
+            {
                 for (int i = 0; i < size; i++)
+                {
                     res += Math.Abs(values[i]/255f - other[1f * i / size]);
+                }
+            }
 
             return res / size;
         }

@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AudioProcessor.cs" />
-    <Compile Include="Core.cs" />
+    <Compile Include="PlayerCore.cs" />
     <Compile Include="Helpers\ModifiedFNV.cs" />
     <Compile Include="Interfaces\IAudioProcessor.cs" />
     <Compile Include="Factory.cs" />

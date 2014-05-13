@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using HoloDB;
 
 namespace IntellectualPlayer.Core
@@ -40,21 +42,28 @@ namespace IntellectualPlayer.Core
         /// </summary>
         unsafe public void Normalize(float k = 1f)
         {
-            var l = Values.Length;
+            float max = 0;
+            for (var i = 0; i < Values.Length; i++)
+            {
+                Values[i] = (Math.Abs(Values[i]));
+                if (Values[i] > max)
+                    max =Values[i];
+            }
+            //var l = Values.Length;
 
             //find abs max sample
-            float max = 0;
-            fixed (float* valuesPtr = Values)
-            {
-                var ptr = valuesPtr;
-                for (int i = 0; i < l; i++)
-                {
-                    var v = *ptr > 0 ? *ptr : -*ptr;
-                    if (v > max)
-                        max = v;
-                    ptr++;
-                }
-            }
+            //float max = 0;
+            //fixed (float* valuesPtr = Values)
+            //{
+            //    var ptr = valuesPtr;
+            //    for (int i = 0; i < l; i++)
+            //    {
+            //        var v = *ptr > 0 ? *ptr : -*ptr;
+            //        if (v > max)
+            //            max = v;
+            //        ptr++;
+            //    }
+            //}
 
             //normalize
             if (max > float.Epsilon)

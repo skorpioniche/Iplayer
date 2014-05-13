@@ -120,14 +120,16 @@ namespace IntellectualPlayer.Core
                     //decode audio source to samples and mp3 tags extracting
                     AudioInfo info = null;
                     using (var stream = item.GetSourceStream())
+                    {
                         info = decoder.Decode(stream, TargetBitrate, item.GetSourceExtension());
+                    }
 
                     //normalize volume level
                     info.Samples.Normalize();
 
                     //launch sample processors
                     foreach (var processor in factory.CreateSampleProcessors())
-                        try
+                    {   try
                         {
                             processor.Process(item, info);
                         }
@@ -135,6 +137,7 @@ namespace IntellectualPlayer.Core
                         {
                             Logger.WarnException("Audio processor exception.", E);
                         }
+                    }
 
                     OnProgress(new ProgressChangedEventArgs(100 * (itemsCount - audioSourceQueue.Count) / itemsCount, null));
                     item.State = AudioState.Processed;

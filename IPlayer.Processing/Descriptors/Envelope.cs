@@ -52,7 +52,9 @@ namespace IntellectualPlayer.Processing
             bw.Write((byte) 0);//version
             bw.Write(packedValues.Length);
             foreach (var v in packedValues)
+            {
                 bw.Write(v);
+            }
         }
 
         public void Load(BinaryReader br)
@@ -61,7 +63,9 @@ namespace IntellectualPlayer.Processing
             var count = br.ReadInt32();
             packedValues = new byte[count];
             for (int i = 0; i < count; i++)
+            {
                 packedValues[i] = br.ReadByte();
+            }
         }
     }
 }

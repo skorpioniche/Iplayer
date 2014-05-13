@@ -9,6 +9,7 @@ using IntellectualPlayer.Processing.Search;
 using IntellectualPlayer.UI;
 using HoloDB;
 using IntellectualPlayer.UI.Controls;
+using Mp3Lib;
 using MusicService.Models;
 using MusicService.ViewModel;
 using MvcFileUploader;
@@ -67,6 +68,16 @@ namespace MusicService.Controllers
             }).ToList();
 
             return View(audios);
+        }
+
+        public ActionResult GetMeta()
+        {
+            ShownItems = new Audios(MusicSingltone.Core.GetAudios());
+
+            var audio = ShownItems.Last();
+            var mp3File = new Mp3File(audio.FullPath);
+
+            return View(mp3File);
         }
 
 

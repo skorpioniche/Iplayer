@@ -1,4 +1,5 @@
-﻿using IntellectualPlayer.Core;
+﻿using System;
+using IntellectualPlayer.Core;
 using HoloDB;
 
 namespace IntellectualPlayer.Processing
@@ -18,25 +19,35 @@ namespace IntellectualPlayer.Processing
 
         /// <summary>
         /// Amplitude envelope builder
+        /// Save maximum values
         /// </summary>
-        public Samples Build(Samples source, int targetBitrate = 20, bool differentiate = false) 
+        public Samples Build(Samples source, int newBitrate = 20, bool differentiate = false) 
         {
-            float k = 1f * targetBitrate /source.Bitrate;
+            float koeff = 1f * newBitrate /source.Bitrate;
             var values = source.Values;
-            var resValues = new float[(int)(values.Length * k)+1];
+            var resValues = new float[(int)(values.Length * koeff)+1];
 
-            for (int i = values.Length - 2; i >= 0; i--)
+            for (var i = values.Length - 2; i >= 0; i--)
             {
-                var ii = (int) (i*k);
-                var prev = resValues[ii];
-                var f = values[i];
-                if (differentiate) f = values[i + 1] - f;
-                if(f < 0) f = -f;
+                var newIndex = (int) (i*koeff);
+                var prevValue = resValues[newIndex];
+                var value = values[i];
+                if (differentiate)
+                {
+                    value = values[i + 1] - value;
+                }
+                value = Math.Abs(value);
 
-                if (prev < f) resValues[ii] = f;
+                if (prevValue < value)
+                {
+                    resValues[newIndex] = value;
+                }
             }
 
-            return new Samples() { Bitrate = targetBitrate, Values = resValues };
+            return new Samples()
+            {
+                Bitrate = newBitrate, Values = resValues
+            };
         }
 
         public virtual void Process(Audio item, AudioInfo info)
